@@ -13,8 +13,8 @@ module load bowtie/2.4.2
 module load samtools/1.13
 module load bwa
 
-sample_name = "A81L_FDSW202625676-1r_BHKHF5DSXY-new_L1"
-ref_genome = ./genome/genome.fa
+sample_name="A81L_FDSW202625676-1r_BHKHF5DSXY-new_L1"
+ref_genome=./genome/genome.fa
 ## 1. build bwa and bowtie2 index if the index files don't exist
 #bwa index ./genome/genome.fa
 #bowtie2-build ./genome/genome.fa ./genome/genome.fa
@@ -26,7 +26,7 @@ samtools sort -@ 4 -m 2G -O bam -o ${sample_name}_sorted.bam A81L_FDSW202625676-
 samtools index ${sample_name}_sorted.bam ${sample_name}_sorted.bam.bai
 
 # 3 hmmcopy_prepare
-if [! -f "genome.fa.map1.bw"]; then
+if [ ! -f "genome.fa.map1.bw" ]; then
     /storage/yuhongtaoLab/liangcai/WGS/hmmcopy_utils/util/mappability/generateMap.pl genome/genome.fa -o genome.fa.map1.bw
 fi
 /storage/yuhongtaoLab/liangcai/WGS/hmmcopy_utils/bin/mapCounter -w 10000 genome.fa.map1.bw > genome.fa.map.w10000.wig
